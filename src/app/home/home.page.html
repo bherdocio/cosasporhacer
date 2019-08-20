@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar mode="md">
+    <ion-title text-left slot="start">
+      Cosas por Hacer 
+    </ion-title>
+    <div slot="end">
+      <ion-button>Hoy: {{hoy2}}</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding center text-center>
+
+  <ion-list>
+    <div class="botonera">
+      <ion-button (click)="liberar()">Liberar seleccionadas</ion-button>
+      <ion-button class="btnOrdenar" (click)="presentActionSheet()"><ion-icon name="funnel"></ion-icon>Ordenar</ion-button>
+    </div>
+    <ion-item lines="none" class="warning" *ngIf="tareas?.length==0"><p>Actualmente no hay tareas para mostrar. Puede agregar tareas con el botón "+".</p></ion-item>
+    <ion-item *ngFor="let tarea of tareas" [ngClass]="{'pendiente': calcularDif(tarea) > 0 || calcularDif(tarea) === -0 && tarea.liberada == false, 'atrasada': calcularDif(tarea) < 0 && tarea.liberada == false, 'liberada': tarea.liberada === true}">
+      <ion-item *ngIf="tareas?.length==0"><p>No hay tareas que mostrar</p></ion-item>
+      <ion-checkbox slot="start" (ionChange)="agregarSelec($event, tarea)"></ion-checkbox>
+      <p slot="start">{{tarea.titulo}}</p>
+      <ion-datetime slot="end" (click)="setOld(tarea.fechaV)" (ngModelChange)="confirmarFecha(tarea)" #datePicker cancelText="Salir" doneText="Ok" [(ngModel)]="tarea.fechaV" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY"></ion-datetime>
+      <ion-label class="label">Fecha aquí</ion-label>
+      <ion-fab-button class="cal" slot="end" size="small" (click)="setOld(tarea.fechaV)" (click)="datePicker.open()"><ion-icon name="calendar"></ion-icon></ion-fab-button>
+      <ion-icon slot="end" *ngIf="calcularDif(tarea) > 0 && tarea.liberada == false || calcularDif(tarea) === -0 && tarea.liberada == false" name="clock"></ion-icon>
+      <ion-icon slot="end" *ngIf="calcularDif(tarea) < 0 && tarea.liberada == false" name="close-circle"></ion-icon>
+      <ion-icon slot="end" *ngIf="tarea.liberada === true" name="checkmark-circle"></ion-icon>
+    </ion-item>
+
+    <ion-item lines="none" class="addButton" (click)="agregar()">
+      <ion-icon class="icon" name="add"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

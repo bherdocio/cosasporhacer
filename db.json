@@ -1,0 +1,25 @@
+{
+  "tareas": [
+    {
+      "titulo": "Comprar pansito",
+      "fechaC": "2019-08-10",
+      "fechaV": "2019-08-23",
+      "liberada": false,
+      "id": 1
+    },
+    {
+      "titulo": "Buscar trabajo",
+      "fechaC": "2019-07-20",
+      "fechaV": "2019-08-01",
+      "liberada": false,
+      "id": 2
+    },
+    {
+      "titulo": "Reparar bicicleta",
+      "fechaC": "2019-08-20",
+      "fechaV": "2019-08-24",
+      "liberada": true,
+      "id": 3
+    }
+  ]
+}
