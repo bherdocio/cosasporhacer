@@ -70,7 +70,7 @@ export class HomePage {
         "liberada": tarea.liberada
       }
   
-      this.http.put(this.url+tarea._id, postData).subscribe(res => {
+      this.http.put(this.url+tarea.id, postData).subscribe(res => {
         this.getTareas().subscribe(tareas =>{
           this.tareas = tareas;
         });
@@ -267,7 +267,7 @@ export class HomePage {
           "liberada": true
         }
   
-          this.http.put(this.url+tarea._id, postData).subscribe(res => {
+          this.http.put(this.url+tarea.id, postData).subscribe(res => {
             this.getTareas().subscribe(tareas =>{
               this.tareas = tareas;
               this.filtrar(this.last);
@@ -294,7 +294,7 @@ export class HomePage {
       this.presentLoading("Espere un momento...");
       this.checked.forEach(tarea =>{
   
-        this.http.delete(this.url+tarea._id).subscribe(res => {
+        this.http.delete(this.url+tarea.id).subscribe(res => {
           this.getTareas().subscribe(tareas =>{
             this.tareas = tareas;
             this.filtrar(this.last);
