@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActionSheetController, ToastController, AlertController } from '@ionic/angular';
+import { ActionSheetController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import * as moment from 'node_modules/moment/moment'
 
 @Component({
@@ -11,15 +11,16 @@ import * as moment from 'node_modules/moment/moment'
 
 export class HomePage {
 
-  url = ' http://localhost:3000/tareas/';
+  url = ' http://localhost:3000/tasks/';
   tareas: any;
   hoy = Date.now();
   checked = [];
   old: any;
   hoy2: any;
   last: any = 1;
+  loading: any = "CACA";
 
-  constructor(private http: HttpClient, private toast: ToastController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController) {
+  constructor(private http: HttpClient, private loadingCtrl: LoadingController,private toast: ToastController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController) {
     
     this.hoy2 = moment().format("DD/MM/YYYY");
 
@@ -69,7 +70,7 @@ export class HomePage {
         "liberada": tarea.liberada
       }
   
-      this.http.put(this.url+tarea.id, postData).subscribe(res => {
+      this.http.put(this.url+tarea._id, postData).subscribe(res => {
         this.getTareas().subscribe(tareas =>{
           this.tareas = tareas;
         });
@@ -111,6 +112,7 @@ export class HomePage {
       subHeader,
       inputs: [
         {
+          id: "autofocus",
           name: 'taskName',
           type: 'text',
           placeholder: 'Ingrese el nombre de la tarea'
@@ -125,6 +127,17 @@ export class HomePage {
     });
 
     await alert.present();
+  }
+
+  async presentLoading(message) {
+    this.loading = await this.loadingCtrl.create({
+      message
+    });
+    await this.loading.present();
+
+    const { role, data } = await this.loading.onDidDismiss();
+
+    console.log('Loading dismissed!');
   }
 
   //presenta menú con opciones para seleccionar los filtros
@@ -190,7 +203,9 @@ export class HomePage {
         handler: () => {
         }
       }
-    ]);
+    ]).then(() =>{
+      document.getElementById('autofocus').focus();
+    });
   }
 
   //uso de la api rest para agregar las tareas a la bd y actualiza la vista con la nueva tarea
@@ -242,6 +257,7 @@ export class HomePage {
     if(this.checked.length <= 0){
       this.presentToast("Debe seleccionar al menos una tarea para liberar");
     }else{
+      this.presentLoading("Espere un momento...");
       this.checked.forEach(tarea =>{
 
         let postData = {
@@ -251,7 +267,7 @@ export class HomePage {
           "liberada": true
         }
   
-          this.http.put(this.url+tarea.id, postData).subscribe(res => {
+          this.http.put(this.url+tarea._id, postData).subscribe(res => {
             this.getTareas().subscribe(tareas =>{
               this.tareas = tareas;
               this.filtrar(this.last);
@@ -262,8 +278,38 @@ export class HomePage {
           });
         
       });
-  
+      setTimeout(() =>{
+        this.loading.dismiss();
+      }, 500)
       this.presentToast("Tareas liberadas");
+      this.checked = [];
+    }
+  }
+
+  eliminar(){
+    if(this.checked.length <= 0){
+      this.presentToast("Debe seleccionar al menos una tarea para eliminar");
+    }else{
+
+      this.presentLoading("Espere un momento...");
+      this.checked.forEach(tarea =>{
+  
+        this.http.delete(this.url+tarea._id).subscribe(res => {
+          this.getTareas().subscribe(tareas =>{
+            this.tareas = tareas;
+            this.filtrar(this.last);
+          });
+          console.log(res);
+        }, (err) => {
+          console.log(err);
+        });
+        
+      });
+      setTimeout(() =>{
+        this.loading.dismiss();
+      }, 500)
+      
+      this.presentToast("Tareas eliminadas");
       this.checked = [];
     }
   }

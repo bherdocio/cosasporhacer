@@ -14,6 +14,7 @@
   <ion-list>
     <div class="botonera">
       <ion-button (click)="liberar()">Liberar seleccionadas</ion-button>
+      <ion-button (click)="eliminar()">Eliminar seleccionadas</ion-button>
       <ion-button class="btnOrdenar" (click)="presentActionSheet()"><ion-icon name="funnel"></ion-icon>Ordenar</ion-button>
     </div>
     <ion-item lines="none" class="warning" *ngIf="tareas?.length==0"><p>Actualmente no hay tareas para mostrar. Puede agregar tareas con el botón "+".</p></ion-item>

@@ -40,6 +40,7 @@ ion-item{
     margin-bottom: 20px;
     border-radius: 10px;
     width: 100%;
+    border: 1px solid gray;
     p{
         text-align: left;
         margin: 0;
@@ -99,7 +100,7 @@ ion-fab-button{
 }
 
 .addButton{
-    border: 1px solid gray;
+    
     height: 100%;
 }
 
