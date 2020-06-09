@@ -18,7 +18,7 @@ export class HomePage {
   old: any;
   hoy2: any;
   last: any = 1;
-  loading: any = "CACA";
+  loading: any;
 
   constructor(private http: HttpClient, private loadingCtrl: LoadingController,private toast: ToastController, private alertCtrl: AlertController, private actionSheetController: ActionSheetController) {
     
@@ -210,6 +210,7 @@ export class HomePage {
 
   //uso de la api rest para agregar las tareas a la bd y actualiza la vista con la nueva tarea
   agregarTarea(data){
+    console.log("Hi")
     return new Promise((resolve, reject) => {
       let today = new Date();
 

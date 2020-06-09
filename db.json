@@ -1,25 +1,25 @@
 {
-  "tareas": [
+  "tasks": [
     {
       "titulo": "Comprar pansito",
       "fechaC": "2019-08-10",
-      "fechaV": "2019-08-23",
-      "liberada": false,
+      "fechaV": "2015-01-23",
+      "liberada": true,
       "id": 1
-    },
-    {
-      "titulo": "Buscar trabajo",
-      "fechaC": "2019-07-20",
-      "fechaV": "2019-08-01",
-      "liberada": false,
-      "id": 2
     },
     {
       "titulo": "Reparar bicicleta",
       "fechaC": "2019-08-20",
-      "fechaV": "2019-08-24",
+      "fechaV": "2019-08-31",
       "liberada": true,
       "id": 3
+    },
+    {
+      "titulo": "Test",
+      "fechaC": "2020-04-06",
+      "fechaV": "2019-11-11",
+      "liberada": true,
+      "id": 4
     }
   ]
 }
