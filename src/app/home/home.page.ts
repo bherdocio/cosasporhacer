@@ -120,7 +120,8 @@ export class HomePage {
         {
           name: 'taskDate',
           type: 'date',
-          min: this.hoy
+          value: moment().format("YYYY-MM-DD"),
+          min: moment().format("YYYY-MM-DD")
         }
       ],
       buttons
@@ -259,7 +260,7 @@ export class HomePage {
       this.presentToast("Debe seleccionar al menos una tarea para liberar");
     }else{
       this.presentLoading("Espere un momento...");
-      this.checked.forEach(tarea =>{
+      this.checked.forEach(async (tarea) =>{
 
         let postData = {
           "titulo": tarea.titulo,
@@ -268,20 +269,22 @@ export class HomePage {
           "liberada": true
         }
   
-          this.http.put(this.url+tarea.id, postData).subscribe(res => {
+          await this.http.put(this.url+tarea.id, postData).subscribe(res => {
+            console.log(res);
             this.getTareas().subscribe(tareas =>{
               this.tareas = tareas;
               this.filtrar(this.last);
             });
-            console.log(res);
           }, (err) => {
             console.log(err);
           });
         
       });
+
       setTimeout(() =>{
         this.loading.dismiss();
-      }, 500)
+      }, 500);
+
       this.presentToast("Tareas liberadas");
       this.checked = [];
     }
@@ -293,19 +296,22 @@ export class HomePage {
     }else{
 
       this.presentLoading("Espere un momento...");
-      this.checked.forEach(tarea =>{
+      this.checked.forEach(async (tarea) =>{
   
-        this.http.delete(this.url+tarea.id).subscribe(res => {
+        await this.http.delete(this.url+tarea.id).subscribe(res => {
+          console.log(res);
           this.getTareas().subscribe(tareas =>{
             this.tareas = tareas;
             this.filtrar(this.last);
           });
-          console.log(res);
         }, (err) => {
           console.log(err);
         });
         
       });
+
+
+
       setTimeout(() =>{
         this.loading.dismiss();
       }, 500)

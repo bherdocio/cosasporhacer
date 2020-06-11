@@ -1,25 +1,11 @@
 {
   "tasks": [
     {
-      "titulo": "Comprar pansito",
-      "fechaC": "2019-08-10",
-      "fechaV": "2015-01-23",
+      "titulo": "test",
+      "fechaC": "2020-06-11",
+      "fechaV": "2010-04-19",
       "liberada": true,
       "id": 1
-    },
-    {
-      "titulo": "Reparar bicicleta",
-      "fechaC": "2019-08-20",
-      "fechaV": "2019-08-31",
-      "liberada": true,
-      "id": 3
-    },
-    {
-      "titulo": "Test",
-      "fechaC": "2020-04-06",
-      "fechaV": "2019-11-11",
-      "liberada": true,
-      "id": 4
     }
   ]
 }

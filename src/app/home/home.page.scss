@@ -1,15 +1,28 @@
-
 ion-content{
-    --background: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    --background: linear-gradient(to top, #fbc2eb 0%, #55b9f3 100%);
+    //--background: #55b9f3;
+}
+
+ion-button{
+    text-transform: none;
+    border-radius: 38px;
+    --background: #55b9f3;
+    box-shadow:  5px 5px 10px #489dcf, 
+                 -5px -5px 10px #62d5ff;
 }
 
 ion-toolbar{
     --background: rgb(68, 0, 255);
     color: white;
-}
+    box-shadow:  5px 5px 10px #4b5dd7, 
+    -5px -5px 10px #657dff;
 
-ion-button{
-    text-transform: none;
+    ion-button{
+        border-radius: 38px;
+        --background: #586DFD;
+        box-shadow:  5px 5px 10px #4b5dd7, 
+                    -5px -5px 10px #657dff;
+    }
 }
 
 .botonera{
@@ -35,12 +48,19 @@ ion-button{
     height: 100%;
 }
 
+#warning{
+    color: white;
+}
+
 ion-item{
     text-align: center;
     margin-bottom: 20px;
-    border-radius: 10px;
     width: 100%;
-    border: 1px solid gray;
+    border-radius: 8px;
+    --background: #55b9f3;
+    box-shadow:  5px 5px 10px #489dcf, 
+                 -5px -5px 10px #62d5ff;
+
     p{
         text-align: left;
         margin: 0;
@@ -56,7 +76,7 @@ ion-item{
 }
 
 ion-item:hover{
-    --background: rgba(97, 14, 192, 0.322);
+    --background: #3f8cb8;
 }
 
 .botonera{
@@ -100,7 +120,7 @@ ion-fab-button{
 }
 
 .addButton{
-    
+    color: white;
     height: 100%;
 }
 
@@ -148,11 +168,12 @@ ion-fab-button{
 
     .botonera{
         text-align: center;
+        margin-bottom: 60px;
 
         ion-button{
             margin: 0;
             width: 100%;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
     }
 
