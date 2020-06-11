@@ -29,7 +29,7 @@ Iniciar servidor json-server en la raiz del proyecto Ionic
 json-server --watch db.json
 ```
 
-Iniciar aplicación Ionic
+Iniciar aplicación Ionic en otra terminal
 ```
 ionic serve
 ```
